@@ -4,7 +4,7 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.renderer.RenderManager;
-import com.jme3.scene.Node;
+import com.jme3.system.AppSettings;
 import mygame.gamestates.LevelGeneratorState;
 import mygame.gamestates.PlayerAppState;
 
@@ -17,11 +17,18 @@ public class Main extends SimpleApplication {
 
     public static void main(String[] args) {
         Main app = new Main();
+        
+        // Settings
+        AppSettings settings = new AppSettings(true);
+        settings.setFrameRate(60);
+        app.setSettings(settings); 
+        
         app.start();
     }
 
     @Override
     public void simpleInitApp() {
+        // Disale flycam
         flyCam.setEnabled(false);
         
         // Create keyboard bindings

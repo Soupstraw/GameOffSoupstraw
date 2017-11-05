@@ -27,10 +27,13 @@ public class MovementControl extends AbstractControl {
     private MovementState movementState = MovementState.IDLE;
     
     private Vector3f targetPos;
-    private Quaternion targetRot;
+    private float targetRot;
+    
+    private float currentRot = 0f;
     
     private float movementSpeed = 3f;
-    private float turnSpeed = 270f;
+    private float turnSpeed = 3f;
+    private float walkStep = 2f;
     
     public enum MovementState{
         IDLE,
@@ -56,13 +59,15 @@ public class MovementControl extends AbstractControl {
                 }
                 break;
             case TURN:
-                Quaternion newRot = new Quaternion(getSpatial().getLocalRotation());
-                newRot.slerp(targetRot, (float) Math.toRadians(turnSpeed * tpf));
-                getSpatial().setLocalRotation(newRot);
-                if(getSpatial().getLocalRotation().dot(targetRot) > 0.99f){
-                    getSpatial().setLocalRotation(targetRot);
+                float deltaRot = Math.min(tpf * turnSpeed, Math.abs(currentRot - targetRot));
+                if(currentRot > targetRot){
+                    currentRot -= deltaRot;
+                }else if(currentRot < targetRot){
+                    currentRot += deltaRot;
+                }else{
                     movementState = MovementState.IDLE;
                 }
+                getSpatial().setLocalRotation(new Quaternion(new float[]{0, currentRot, 0}));
                 break;
         }
     }
@@ -92,7 +97,7 @@ public class MovementControl extends AbstractControl {
     public void moveForward(){
         if(movementState == MovementState.IDLE){
             movementState = MovementState.FORWARD;
-            Vector3f forwardVec = getSpatial().getLocalRotation().mult(new Vector3f(0, 0, 1));
+            Vector3f forwardVec = getSpatial().getLocalRotation().mult(new Vector3f(0, 0, walkStep));
             targetPos = getSpatial().getLocalTranslation().add(forwardVec);
         }
     }
@@ -100,16 +105,14 @@ public class MovementControl extends AbstractControl {
     public void turnLeft(){
         if(movementState == MovementState.IDLE){
             movementState = MovementState.TURN;
-            Quaternion rotateBy = new Quaternion().fromAngles(0, (float) Math.toRadians(90), 0);
-            targetRot = new Quaternion(getSpatial().getLocalRotation()).mult(rotateBy);
+            targetRot += Math.toRadians(90);
         }
     }
     
     public void turnRight(){
         if(movementState == MovementState.IDLE){
             movementState = MovementState.TURN;
-            Quaternion rotateBy = new Quaternion().fromAngles(0, (float) Math.toRadians(-90), 0);
-            targetRot = new Quaternion(getSpatial().getLocalRotation()).mult(rotateBy);
+            targetRot += Math.toRadians(-90);
         }
     }
     

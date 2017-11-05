@@ -1,0 +1,34 @@
+MaterialDef Simple {
+    MaterialParameters {
+        Texture2D ColorMap
+    }
+    Technique {
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+        VertexShaderNodes {
+            ShaderNode CommonVert {
+                Definition : CommonVert : Common/MatDefs/ShaderNodes/Common/CommonVert.j3sn
+                InputMappings {
+                    worldViewProjectionMatrix = WorldParam.WorldViewProjectionMatrix
+                    modelPosition = Global.position.xyz
+                }
+                OutputMappings {
+                    Global.position = projPosition
+                }
+            }
+        }
+        FragmentShaderNodes {
+            ShaderNode ColorMult {
+                Definition : DefaultShader : Shaders/DefaultShader.j3sn
+                InputMappings {
+                    m_ColorMap = MatParam.ColorMap
+                    m_texCoord = CommonVert.texCoord1
+                }
+                OutputMappings {
+                    Global.color = m_Color
+                }
+            }
+        }
+    }
+}

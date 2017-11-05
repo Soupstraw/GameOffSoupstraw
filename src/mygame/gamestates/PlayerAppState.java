@@ -37,6 +37,7 @@ public class PlayerAppState extends AbstractAppState {
         
         // Create player node
         player = new Node();
+        player.setLocalTranslation(0, 0, 0);
         playerMovement = new MovementControl();
         player.addControl(playerMovement);
         ((SimpleApplication) app).getRootNode().attachChild(player);

@@ -1,0 +1,19 @@
+ShaderNodeDefinitions{ 
+    ShaderNodeDefinition DefaultShader {      
+        Type: Fragment
+
+        Shader GLSL100: Shaders/DefaultShader100.frag
+        
+        Documentation{
+                        
+            @input sampler2D m_ColorMap Color map
+        }
+        Input {
+            sampler2D m_ColorMap
+            vec2 m_texCoord
+        }
+        Output {
+            vec4 m_Color
+        }
+    }
+}
