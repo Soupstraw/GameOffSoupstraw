@@ -17,6 +17,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.AbstractControl;
 import com.jme3.scene.control.Control;
 import java.io.IOException;
+import mygame.gamestates.LevelGeneratorState;
 
 /**
  *
@@ -31,9 +32,8 @@ public class MovementControl extends AbstractControl {
     
     private float currentRot = 0f;
     
-    private float movementSpeed = 3f;
+    private float movementSpeed = 5f;
     private float turnSpeed = 3f;
-    private float walkStep = 2f;
     
     public enum MovementState{
         IDLE,
@@ -97,7 +97,7 @@ public class MovementControl extends AbstractControl {
     public void moveForward(){
         if(movementState == MovementState.IDLE){
             movementState = MovementState.FORWARD;
-            Vector3f forwardVec = getSpatial().getLocalRotation().mult(new Vector3f(0, 0, walkStep));
+            Vector3f forwardVec = getSpatial().getLocalRotation().mult(new Vector3f(0, 0, LevelGeneratorState.TILE_SIZE));
             targetPos = getSpatial().getLocalTranslation().add(forwardVec);
         }
     }

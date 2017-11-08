@@ -5,8 +5,10 @@
         <group>
             <file>file:/D:/Documents/GameOffSoupStraw/src/mygame/controls/MovementControl.java</file>
             <file>file:/D:/Documents/GameOffSoupStraw/src/mygame/gamestates/PlayerAppState.java</file>
+            <file>file:/D:/Documents/GameOffSoupStraw/assets/Shaders/DefaultShader.j3sn</file>
             <file>file:/D:/Documents/GameOffSoupStraw/src/mygame/Main.java</file>
             <file>file:/D:/Documents/GameOffSoupStraw/src/mygame/gamestates/LevelGeneratorState.java</file>
+            <file>file:/D:/Documents/GameOffSoupStraw/assets/Shaders/DefaultShader100.frag</file>
         </group>
     </open-files>
 </project-private>

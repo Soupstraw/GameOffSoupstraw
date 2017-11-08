@@ -33,7 +33,7 @@ public class LevelGeneratorState extends AbstractAppState {
     private Node rootNode;
     private AssetManager assetManager;
     
-    private float tileSize = 2f;
+    public static final float TILE_SIZE = 5f;
     
     private Node[][] tileMap;
     
@@ -72,15 +72,18 @@ public class LevelGeneratorState extends AbstractAppState {
         for(int y = 0; y < height; y++){
             for(int x = 0; x < width; x++){
                 Node tile = new Node();
-                tile.setLocalTranslation(new Vector3f(x*tileSize, 0f, y*tileSize));
+                tile.setLocalTranslation(new Vector3f(x*TILE_SIZE, 0f, y*TILE_SIZE));
                 
                 // Create floor quad
-                Quad quadMesh = new Quad(tileSize, tileSize);
+                Quad quadMesh = new Quad(TILE_SIZE, TILE_SIZE);
                 Geometry boxGeo = new Geometry("Colored Box", quadMesh); 
                 boxGeo.setLocalRotation(new Quaternion().fromAngles((float) Math.toRadians(-90), 0, 0));
-                boxGeo.setLocalTranslation(-tileSize/2, -1.5f, tileSize/2);
+                boxGeo.setLocalTranslation(-TILE_SIZE/2, -1.5f, TILE_SIZE/2);
                 Material boxMat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-                boxMat.setTexture("ColorMap", assetManager.loadTexture("Textures/floor.png"));
+                Texture tex = assetManager.loadTexture("Textures/floor.png");
+                tex.setMagFilter(Texture.MagFilter.Nearest);
+                tex.setMinFilter(Texture.MinFilter.NearestLinearMipMap);
+                boxMat.setTexture("ColorMap", tex);
                 boxGeo.setMaterial(boxMat); 
                 
                 tile.attachChild(boxGeo);

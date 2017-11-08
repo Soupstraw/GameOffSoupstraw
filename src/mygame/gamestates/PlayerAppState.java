@@ -13,6 +13,7 @@ import com.jme3.input.InputManager;
 import com.jme3.input.controls.AnalogListener;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
+import com.jme3.system.AppSettings;
 import java.util.logging.Logger;
 import mygame.controls.MovementControl;
 
@@ -34,6 +35,9 @@ public class PlayerAppState extends AbstractAppState {
         
         cam = app.getCamera();
         input = app.getInputManager();
+        
+        AppSettings settings = app.getContext().getSettings();
+        cam.setFrustumPerspective(120f, settings.getWidth()/(settings.getHeight()/0.65f), 0.1f, 1000f);
         
         // Create player node
         player = new Node();

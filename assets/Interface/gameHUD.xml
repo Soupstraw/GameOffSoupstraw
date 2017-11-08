@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<nifty xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://nifty-gui.lessvoid.com/nifty-gui" xsi:schemaLocation="https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd">
+    <useStyles filename="nifty-default-styles.xml"/>
+    <useControls filename="nifty-default-controls.xml"/>
+    <screen id="MainScreen" controller="mygame.Main">
+        <layer id="MainLayer" childLayout="vertical">
+            <panel childLayout="absolute" width="100%" height="65%"/>
+            <panel childLayout="horizontal" backgroundColor="#777777" width="100%" height="35%">
+                <control name="scrollPanel" id="MessageLog" width="40%" height="100%" backgroundColor="#ffffff" horizontal="false"/>
+                <control name="tabGroup">
+                    
+                </control>
+            </panel>
+        </layer>
+    </screen>
+</nifty>

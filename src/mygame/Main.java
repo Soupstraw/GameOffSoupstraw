@@ -5,6 +5,7 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.renderer.RenderManager;
 import com.jme3.system.AppSettings;
+import mygame.gamestates.HUDState;
 import mygame.gamestates.LevelGeneratorState;
 import mygame.gamestates.PlayerAppState;
 
@@ -17,10 +18,14 @@ public class Main extends SimpleApplication {
 
     public static void main(String[] args) {
         Main app = new Main();
+        app.setShowSettings(false);
         
         // Settings
         AppSettings settings = new AppSettings(true);
         settings.setFrameRate(60);
+        settings.setResolution(640, 480);
+        settings.setGammaCorrection(false);
+        settings.setBitsPerPixel(16);
         app.setSettings(settings); 
         
         app.start();
@@ -39,6 +44,7 @@ public class Main extends SimpleApplication {
         // Attach states
         stateManager.attach(new LevelGeneratorState());
         stateManager.attach(new PlayerAppState());
+        stateManager.attach(new HUDState());
     }
 
     @Override
